@@ -12,6 +12,9 @@ import ArchivePage from './pages/ArchivePage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import CoursePage from './pages/CoursePage';
+import AdminDashboard from './pages/AdminDashboard';
+import AdminUsers from './pages/AdminUsers';
+import AdminProjects from './pages/AdminProjects';
 
 function App() {
   return (
@@ -34,6 +37,9 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/course" element={<CoursePage />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/users" element={<AdminUsers />} />
+            <Route path="/admin/projects" element={<AdminProjects />} />
           </Routes>
         </motion.main>
       </div>

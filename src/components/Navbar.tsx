@@ -99,6 +99,17 @@ const Navbar = () => {
                 <span>Login</span>
               </motion.button>
             </Link>
+
+            {/* Admin Access - Only show for demo purposes */}
+            <Link to="/admin">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg font-medium hover:shadow-lg transition-shadow"
+              >
+                <span>Admin</span>
+              </motion.button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}

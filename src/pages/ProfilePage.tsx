@@ -3,7 +3,8 @@ import { motion } from 'framer-motion';
 import { 
   User, Calendar, MessageCircle, Vote, Trophy, 
   Settings, Edit3, MapPin, Link as LinkIcon, 
-  Github, Twitter, Linkedin, Mail, Award
+  Github, Twitter, Linkedin, Mail, Award, Shield,
+  Ban, Trash2, Eye
 } from 'lucide-react';
 import { mockUsers, mockProjects } from '../data/mockData';
 import { Link } from 'react-router-dom';
@@ -11,6 +12,7 @@ import { Link } from 'react-router-dom';
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState<'projects' | 'votes' | 'comments' | 'activity'>('projects');
   const [isEditing, setIsEditing] = useState(false);
+  const [isAdmin] = useState(true); // Mock admin status - in real app, get from auth context
   
   // Mock current user data
   const currentUser = {
@@ -191,6 +193,30 @@ const ProfilePage = () => {
                   <Settings className="w-4 h-4" />
                   <span>Settings</span>
                 </motion.button>
+                
+                {/* Admin Controls */}
+                {isAdmin && (
+                  <div className="flex space-x-2 ml-4 pl-4 border-l border-white/30">
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="px-4 py-3 bg-orange-500/20 backdrop-blur-sm border border-orange-300/30 text-white rounded-xl font-semibold hover:bg-orange-500/30 transition-all duration-300 flex items-center space-x-2"
+                      title="Suspend User"
+                    >
+                      <Ban className="w-4 h-4" />
+                      <span>Suspend</span>
+                    </motion.button>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="px-4 py-3 bg-red-500/20 backdrop-blur-sm border border-red-300/30 text-white rounded-xl font-semibold hover:bg-red-500/30 transition-all duration-300 flex items-center space-x-2"
+                      title="Delete User"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                      <span>Delete</span>
+                    </motion.button>
+                  </div>
+                )}
               </div>
             </div>
           </div>

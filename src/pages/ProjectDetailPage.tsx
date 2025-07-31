@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 import { 
   ArrowLeft, Vote, Heart, Share2, Calendar, User, 
   FileText, Download, MessageCircle, ThumbsUp, Reply,
-  ChevronLeft, ChevronRight, Play, ExternalLink
+  ChevronLeft, ChevronRight, Play, ExternalLink, Shield,
+  Edit3, Trash2, Eye, Ban
 } from 'lucide-react';
 import { mockProjects, mockComments } from '../data/mockData';
 
@@ -16,6 +17,7 @@ const ProjectDetailPage = () => {
   const [newComment, setNewComment] = useState('');
   const [replyingTo, setReplyingTo] = useState<string | null>(null);
   const [replyContent, setReplyContent] = useState('');
+  const [isAdmin] = useState(true); // Mock admin status - in real app, get from auth context
 
   const project = mockProjects.find(p => p.id === id);
   const comments = mockComments[id || ''] || [];
@@ -168,6 +170,36 @@ const ProjectDetailPage = () => {
                   >
                     <Share2 className="w-5 h-5 text-gray-600" />
                   </motion.button>
+                  
+                  {/* Admin Controls */}
+                  {isAdmin && (
+                    <div className="flex space-x-2 ml-4 pl-4 border-l border-gray-200">
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="p-3 bg-blue-100 hover:bg-blue-200 rounded-full transition-colors"
+                        title="Edit Project"
+                      >
+                        <Edit3 className="w-5 h-5 text-blue-600" />
+                      </motion.button>
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="p-3 bg-orange-100 hover:bg-orange-200 rounded-full transition-colors"
+                        title="Hide Project"
+                      >
+                        <Eye className="w-5 h-5 text-orange-600" />
+                      </motion.button>
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="p-3 bg-red-100 hover:bg-red-200 rounded-full transition-colors"
+                        title="Delete Project"
+                      >
+                        <Trash2 className="w-5 h-5 text-red-600" />
+                      </motion.button>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -285,6 +317,30 @@ const ProjectDetailPage = () => {
                             <Reply className="w-4 h-4" />
                             <span className="text-sm">Reply</span>
                           </button>
+                          
+                          {/* Admin Comment Controls */}
+                          {isAdmin && (
+                            <div className="flex items-center space-x-2 ml-4 pl-4 border-l border-gray-200">
+                              <button
+                                className="text-blue-500 hover:text-blue-700 transition-colors"
+                                title="Edit Comment"
+                              >
+                                <Edit3 className="w-4 h-4" />
+                              </button>
+                              <button
+                                className="text-orange-500 hover:text-orange-700 transition-colors"
+                                title="Hide Comment"
+                              >
+                                <Eye className="w-4 h-4" />
+                              </button>
+                              <button
+                                className="text-red-500 hover:text-red-700 transition-colors"
+                                title="Delete Comment"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            </div>
+                          )}
                         </div>
 
                         {/* Reply Form */}
